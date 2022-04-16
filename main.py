@@ -13,9 +13,9 @@ def page_index():
     all_candidates = ''
     for i in range(len(candidat)):
         one_candidat = f'''<pre>
-   Имя кандидата - {candidat[i]['name']}
+   <h1>Имя кандидата - {candidat[i]['name']}
    Позиция кандидата - {candidat[i]['position']}
-   Навыки - {candidat[i]['skills']}\n
+   Навыки - {candidat[i]['skills']}\n</h1>
    <pre>
    '''
         all_candidates = all_candidates + one_candidat
@@ -28,9 +28,9 @@ def page_candidates(x):
    <img src = "{candidat[x - 1]['picture']}">
    
    <pre>
-   Имя кандидата - {candidat[x - 1]['name']}
+   <h1>Имя кандидата - {candidat[x - 1]['name']}
    Позиция кандидата - {candidat[x - 1]['position']}
-   Навыки - {candidat[x - 1]['skills']}\n
+   Навыки - {candidat[x - 1]['skills']}\n</h1>
    <pre>
    '''
     return one_candidat
@@ -41,9 +41,9 @@ def page_skills(skill):
     skill_candidates = ''
     for i in range(len(candidat)):
         one_candidat = f'''<pre>
-      Имя кандидата - {candidat[i]['name']}
+      <h1>Имя кандидата - {candidat[i]['name']}
       Позиция кандидата - {candidat[i]['position']}
-      Навыки - {candidat[i]['skills']}\n
+      Навыки - {candidat[i]['skills']}\n</h1>
       <pre>
       '''
         if skill.lower() in candidat[i]['skills'].lower().split(', '):
