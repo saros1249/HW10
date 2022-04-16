@@ -1,51 +1,38 @@
 # Домашняя работа - 10.
-import json
 from flask import Flask
-
-with open('candidates.json', 'r', encoding='utf8') as file:
-    candidat = json.load(file)
+from utils import candidates, get_candidat
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def page_index():
+    candidat = candidates()
     all_candidates = ''
     for i in range(len(candidat)):
-        one_candidat = f'''<pre>
-   <h1>Имя кандидата - {candidat[i]['name']}
-   Позиция кандидата - {candidat[i]['position']}
-   Навыки - {candidat[i]['skills']}\n</h1>
-   <pre>
-   '''
+        one_candidat = get_candidat(i)
         all_candidates = all_candidates + one_candidat
     return all_candidates
 
 
 @app.route("/candidates/<int:x>")
 def page_candidates(x):
+    candidat = candidates()
     one_candidat = f'''
    <img src = "{candidat[x - 1]['picture']}">
    
    <pre>
-   <h1>Имя кандидата - {candidat[x - 1]['name']}
-   Позиция кандидата - {candidat[x - 1]['position']}
-   Навыки - {candidat[x - 1]['skills']}\n</h1>
-   <pre>
+   one_candidat = {get_candidat(x - 1)}
    '''
     return one_candidat
 
 
 @app.route("/skills/<skill>")
 def page_skills(skill):
+    candidat = candidates()
     skill_candidates = ''
     for i in range(len(candidat)):
-        one_candidat = f'''<pre>
-      <h1>Имя кандидата - {candidat[i]['name']}
-      Позиция кандидата - {candidat[i]['position']}
-      Навыки - {candidat[i]['skills']}\n</h1>
-      <pre>
-      '''
+        one_candidat = get_candidat(i)
         if skill.lower() in candidat[i]['skills'].lower().split(', '):
             skill_candidates = skill_candidates + one_candidat
     return skill_candidates
